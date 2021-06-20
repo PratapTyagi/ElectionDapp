@@ -1,9 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import Electionabi from "./contracts/Election.json";
 import Web3 from "web3";
+import Navbar from "./components/navbar/Navbar";
 
 function App() {
+  const [currentAccount, setCurrentAccount] = useState("");
+  const [loader, setLoader] = useState(false);
   useEffect(() => {
     loadWeb3();
     loadBlockchainData();
@@ -23,10 +26,12 @@ function App() {
   };
 
   const loadBlockchainData = async () => {
+    setLoader(true);
     const web3 = window.web3;
 
-    const accounts = web3.eth.getAccounts();
+    const accounts = await web3.eth.getAccounts();
     const account = accounts[0];
+    setCurrentAccount(account);
 
     const networkId = await web3.eth.net.getId();
     const networkData = Electionabi.networks[networkId];
@@ -36,15 +41,24 @@ function App() {
         Electionabi.abi,
         networkData.address
       );
+      setLoader(false);
       console.log(election);
     } else {
       window.alert("Smart contract not deployed on current network");
     }
   };
 
+  if (loader) {
+    return (
+      <div>
+        <h2>Loading...</h2>
+      </div>
+    );
+  }
+
   return (
     <div className="app">
-      <h1>Starter</h1>
+      <Navbar currentAccount={currentAccount} />
     </div>
   );
 }

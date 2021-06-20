@@ -1,0 +1,26 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  background-color: rgb(49, 49, 49);
+  color: whitesmoke;
+}
+
+.navbar > h2 {
+  font-weight: 500;
+}
+
+.navbar__userAddress > h5 {
+  font-weight: 300;
+}
+
+@media screen and (max-width: 800px) {
+  .navbar {
+    display: flex;
+    flex-direction: column;
+  }
+  .navbar > h2 {
+    margin-bottom: 5px;
+  }
+}
