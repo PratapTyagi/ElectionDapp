@@ -1,3 +1,7 @@
 .app {
   text-align: center;
 }
+
+body {
+  --theame-color: rgb(103, 139, 206);
+}

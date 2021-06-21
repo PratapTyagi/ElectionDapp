@@ -2,13 +2,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
-  background-color: rgb(49, 49, 49);
+  padding: 10px 20px;
+  background-color: rgb(37, 37, 37);
   color: whitesmoke;
 }
 
 .navbar > h2 {
   font-weight: 500;
+  color: var(--theame-color);
 }
 
 .navbar__userAddress > h5 {
@@ -21,6 +22,10 @@
     flex-direction: column;
   }
   .navbar > h2 {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+  }
+  .navbar__userAddress > h5 {
+    padding: 5px 0;
+    font-size: 12px;
   }
 }

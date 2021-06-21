@@ -1,0 +1,60 @@
+.body {
+  display: flex;
+  flex-direction: column;
+}
+
+.body > h3 {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  color: rgb(37, 37, 37);
+}
+
+.table {
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+.thead {
+  background-color: rgb(37, 37, 37);
+  color: whitesmoke;
+}
+
+.body > form {
+  display: flex;
+  flex-direction: column;
+}
+
+.body > form > select {
+  width: 80%;
+  cursor: pointer;
+  padding: 10px;
+  outline: none;
+  border: 1px solid rgb(37, 37, 37);
+  margin: 0 auto;
+}
+
+form > select > option {
+  color: whitesmoke;
+  background-color: rgb(37, 37, 37);
+}
+
+.body > form > button {
+  width: 20%;
+  margin: 50px auto 20px auto;
+  padding: 10px;
+  outline: none;
+  cursor: pointer;
+  border: 1px solid blue;
+  border-radius: 30px;
+  background-color: white;
+  color: blue;
+  font-weight: 600;
+}
+
+.body > form > button:hover {
+  background-color: var(--theame-color);
+  border: 1px solid var(--theame-color);
+  color: whitesmoke;
+  transition: color 0.2s ease-out;
+  transition: background-color 0.2s ease-out;
+}
