@@ -9,6 +9,7 @@ function App() {
   const [currentAccount, setCurrentAccount] = useState("");
   const [loader, setLoader] = useState(false);
   const [presentCandidates, setPresentCandidates] = useState([]);
+  const [elections, setElections] = useState({});
 
   useEffect(() => {
     loadWeb3();
@@ -44,7 +45,7 @@ function App() {
         Electionabi.abi,
         networkData.address
       );
-      console.log(election);
+      setElections(election);
       let candidateCount = await election.methods.candidatesCount().call();
       let i = 1;
       while (i <= candidateCount) {
@@ -58,6 +59,21 @@ function App() {
     }
   };
 
+  const castVote = async (candidateId) => {
+    setLoader(true);
+    window.location.reload();
+    const temp = await elections.methods
+      .Vote(candidateId)
+      .send({ from: currentAccount })
+      .on("transactionhash", () => {
+        console.log("Successfully voted");
+      });
+    if (temp) alert("Voted");
+    window.location.reload();
+
+    setLoader(false);
+  };
+
   if (loader) {
     return (
       <div>
@@ -69,7 +85,11 @@ function App() {
   return (
     <div className="app">
       <Navbar currentAccount={currentAccount} />
-      <Body presentCandidates={presentCandidates} />
+      <Body
+        presentCandidates={presentCandidates}
+        castVote={castVote}
+        currentAccount={currentAccount}
+      />
     </div>
   );
 }

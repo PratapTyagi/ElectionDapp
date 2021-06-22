@@ -1,14 +1,17 @@
 import "./Body.css";
 import { useState } from "react";
-const Body = ({ presentCandidates }) => {
+const Body = ({ presentCandidates, castVote, currentAccount }) => {
   const [candidate, setCandidate] = useState("");
   const candidateSelection = (e) => {
     setCandidate(e.target.value);
   };
 
-  const selectCandidate = () => {};
-
-  console.log(candidate);
+  const selectCandidate = (e) => {
+    e.preventDefault();
+    if (candidate !== "0") {
+      castVote(Number(candidate));
+    } else window.alert("Error submitting");
+  };
 
   return (
     <div className="body">
@@ -34,16 +37,18 @@ const Body = ({ presentCandidates }) => {
       <h3>Cast Vote</h3>
       <form onSubmit={selectCandidate}>
         <select name="candidate" onChange={candidateSelection}>
-          <option value="">Choose</option>
+          <option value="0">Choose</option>
           {presentCandidates.map((candidate) => (
-            <option key={candidate._id} value={candidate.name}>
+            <option key={candidate._id} value={`${candidate._id}`}>
               {candidate.name}
             </option>
           ))}
         </select>
         <button type="submit">VOTE</button>
       </form>
-      <p>Your address: </p>
+      <p>
+        Your address: <strong>{currentAccount}</strong>
+      </p>
     </div>
   );
 };
